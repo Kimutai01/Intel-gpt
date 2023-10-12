@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello</title>
+  </head>
+  <body>
+    <h1>Hello</h1>
+
+    <h2>Uploaded Documents:</h2>
+    <ul>
+      {% for document in documents %}
+      <li>{{ document.document.name }}</li>
+      {% endfor %}
+    </ul>
+
+    <h2>Message:</h2>
+    {% if message %}
+    <p>{{ message }}</p>
+    {% else %}
+    <p>No message to display.</p>
+    {% endif %}
+
+    <h2>File Contents:</h2>
+    {% if file_contents %}
+    <pre>{{ file_contents }}</pre>
+    {% else %}
+    <p>No file contents to display.</p>
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %} {{ form.as_p }}
+      <button type="submit">Upload</button>
+    </form>
+
+    <form method="post">
+      {% csrf_token %}
+      <input type="text" name="name" />
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>
